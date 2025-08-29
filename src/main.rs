@@ -1,4 +1,4 @@
-use std::{env, fs, process};
+use std::{env, error::Error, fs, process};
 
 fn main() {
     // passing arguments: cargo run -- test files/poem.txt
@@ -10,14 +10,10 @@ fn main() {
         process::exit(1);
     });
 
-    println!("Query => {}", config.query);
-    println!("In File: {}", config.file_path);
-
-    // read the file
-    let content = fs::read_to_string(config.file_path)
-        .expect("Should be able to read the file");
-
-    println!("text: \n{content}");
+    if let Err(err) = run(config) {
+        println!("{err}");
+        process::exit(1);
+    };
 
 }
 
@@ -38,4 +34,17 @@ impl Config {
 
         Ok(Config {query, file_path})
     }
+}
+
+
+fn run(config: Config) -> Result<(), Box<dyn Error>> {
+    println!("Query => {}", config.query);
+    println!("In File: {}", config.file_path);
+
+    // read the file
+    let content = fs::read_to_string(config.file_path)?;
+
+    println!("text: \n{content}");
+
+    Ok(())
 }
