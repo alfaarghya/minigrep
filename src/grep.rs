@@ -64,4 +64,17 @@ Trust me.";
 
         assert_eq!(vec!["Rust:", "Trust me."], search(query, contents, true));
     }
+
+    // TEST 3: pattern does not match
+    #[test]
+    fn pattern_miss_matched() {
+        let query = "TypeScript";
+        let contents = "\
+Rust:
+safe, fast, productive.
+Pick three.
+Trust me.";
+
+        assert_eq!(Vec::<String>::new(), search(query, contents, true));
+    }
 }
