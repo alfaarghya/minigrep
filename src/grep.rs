@@ -2,41 +2,37 @@ pub fn search<'a>(
     pattern: &str,
     contents: &'a str,
     case_insensitive: bool,
-    invert_match: bool
+    invert_match: bool,
 ) -> Vec<(usize, &'a str)> {
     let mut output = Vec::new();
 
     if case_insensitive {
-        search_case_insensitive(&pattern.to_lowercase(), contents, invert_match, &mut output);
+        let pattern = pattern.to_lowercase();
+        search_with(contents, invert_match, &mut output, |line| {
+            line.to_lowercase().contains(&pattern)
+        });
     } else {
-        search_case_sensitive(pattern, contents, invert_match, &mut output);
+        search_with(contents, invert_match, &mut output, |line| {
+            line.contains(pattern)
+        });
     }
 
     output
 }
 
 /**
-* case sensitive search
+* Generic search function
 **/
-fn search_case_sensitive<'a>(pattern: &str, contents: &'a str, invert_match: bool, output: &mut Vec<(usize, &'a str)>) {
-    for (idx, line) in contents.lines().enumerate() {
-        if line.contains(pattern) ^ invert_match {
-            output.push((idx + 1, line));
-        }
-    }
-}
-
-/**
-* case insensitive search
-**/
-fn search_case_insensitive<'a>(
-    pattern: &str,
+fn search_with<'a, F>(
     contents: &'a str,
     invert_match: bool,
     output: &mut Vec<(usize, &'a str)>,
-) {
+    matcher: F,
+) where
+    F: Fn(&str) -> bool,
+{
     for (idx, line) in contents.lines().enumerate() {
-        if line.to_lowercase().contains(pattern) ^ invert_match {
+        if matcher(line) ^ invert_match {
             output.push((idx + 1, line));
         }
     }
@@ -88,7 +84,10 @@ safe, fast, productive.
 Pick three.
 Trust me.";
 
-        assert_eq!(Vec::<(usize, &str)>::new(), search(query, contents, true, false));
+        assert_eq!(
+            Vec::<(usize, &str)>::new(),
+            search(query, contents, true, false)
+        );
     }
 
     // TEST 4: invert match with case sensitive
