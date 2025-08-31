@@ -8,7 +8,7 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 
         // all match lines
         let results: Vec<(usize, &str)> =
-            grep::search(&config.pattern, &contents, config.case_insensitive);
+            grep::search(&config.pattern, &contents, config.case_insensitive, config.invert_match);
 
         // count the matched patterns
         if config.count_only {
