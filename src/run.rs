@@ -10,6 +10,12 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
         let results: Vec<(usize, &str)> =
             grep::search(&config.pattern, &contents, config.case_insensitive);
 
+        // count the matched patterns
+        if config.count_only {
+            println!("{}:{}", file_path, results.len());
+           continue;
+        }
+
         // results empty -> no matches on display
         if !results.is_empty() {
             // result available -> display matches on screen
