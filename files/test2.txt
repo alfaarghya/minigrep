@@ -1,0 +1,50 @@
+This is a test file with many lines.
+Rust appears often in this document.
+rust makes systems programming easier.
+Do you trust this example?
+Some write RUST in uppercase.
+Without trust, there is no teamwork.
+Rust gives control over memory.
+In rust, ownership is key.
+Trust grows over time.
+Many companies adopt Rust gradually.
+The journey with rust can be rewarding.
+Building trust takes effort.
+Some people confuse rust with corrosion.
+RUST developers are passionate.
+Trust issues slow down progress.
+Rust tooling is powerful.
+The rust compiler is sometimes strict.
+Mutual trust is vital for open source.
+Writing safe code in rust is possible.
+Some trust benchmarks, others don’t.
+Rust empowers low-level programming.
+RUST creates safe abstractions.
+Trust makes collaboration smoother.
+Rust thrives on community input.
+Without rust, memory bugs are harder to avoid.
+Trust the process of learning.
+Rust compiles ahead of time.
+Some projects require more trust than others.
+Rust offers safe concurrency.
+The trust of developers drives adoption.
+Rust aims to replace unsafe code.
+Trust can be broken by poor leadership.
+Rust syntax is inspired by many languages.
+Teams must maintain trust.
+Rust is loved by many programmers.
+Some dislike rust’s complexity.
+Trust impacts software success.
+Rust removes data races.
+Trust reduces friction in discussions.
+Rust encourages modern practices.
+Trust binds communities together.
+Rust is secure by design.
+TRUST must be earned.
+Rust can be integrated with C libraries.
+Rust adoption is rising.
+Developers trust Rust for reliability.
+Rust supports pattern matching.
+Trust can’t be forced.
+Rust is a multi-paradigm language.
+In TRUST we build better systems.
