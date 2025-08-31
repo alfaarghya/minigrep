@@ -4,6 +4,7 @@ pub struct Config {
     pub pattern: String,
     pub file_paths: Vec<String>,
     pub case_insensitive: bool,
+    pub line_number: bool,
 }
 
 impl Config {
@@ -19,15 +20,17 @@ impl Config {
         }
 
         let pattern: String = args[1].clone();
-        //handle duplicate file paths with HashSet
-        let mut file_paths: HashSet<String> = HashSet::new();
+        let mut file_paths: HashSet<String> = HashSet::new(); //handle duplicate file paths with HashSet
         let mut case_insensitive: bool = false;
+        let mut line_number: bool = false;
 
         for arg in &args[2..] {
-            if arg == "-i" {
-                case_insensitive = true;
-            } else {
-                file_paths.insert(arg.clone());
+            match arg.as_str() {
+                "-i" => case_insensitive = true, // case insensitive -> flag '-i'
+                "-n" => line_number = true, // show line number -> flag '-n'
+                _ => {
+                    file_paths.insert(arg.clone());
+                }
             }
         }
 
@@ -40,6 +43,7 @@ impl Config {
             pattern,
             file_paths: file_paths.into_iter().collect(), //convert into vector
             case_insensitive,
+            line_number,
         })
     }
 }

@@ -7,14 +7,19 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
         let contents: String = fs::read_to_string(&file_path)?;
 
         // all match lines
-        let results: Vec<&str> = grep::search(&config.pattern, &contents, config.case_insensitive);
+        let results: Vec<(usize, &str)> =
+            grep::search(&config.pattern, &contents, config.case_insensitive);
 
         // results empty -> no matches on display
         if !results.is_empty() {
             // result available -> display matches on screen
             println!("--- Matches in {file_path} ---");
-            for line in results {
-                println!("{line}");
+            for (line_num, line) in results {
+                if config.line_number {
+                    println!("{}:{}", line_num, line);
+                } else {
+                    println!("{line}");
+                }
             }
         }
     }
